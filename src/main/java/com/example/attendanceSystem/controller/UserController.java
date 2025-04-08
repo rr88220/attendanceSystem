@@ -1,6 +1,5 @@
 package com.example.attendanceSystem.controller;
 
-import com.example.attendanceSystem.persistence.StudentEntity;
 import com.example.attendanceSystem.persistence.UserEntity;
 import com.example.attendanceSystem.persistence.UserRepository;
 import com.example.attendanceSystem.service.UserService;
@@ -30,8 +29,9 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<UserEntity> Create(@RequestBody UserEntity userEntity) {
-        UserEntity user = userRepository.save(userEntity);
-        return ResponseEntity.ok(user);
+        UserEntity user = userService.save(userEntity);
+        if(user != null) return ResponseEntity.ok(user);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/update")

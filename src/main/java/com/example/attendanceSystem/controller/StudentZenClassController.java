@@ -1,6 +1,5 @@
 package com.example.attendanceSystem.controller;
 
-import com.example.attendanceSystem.persistence.StudentEntity;
 import com.example.attendanceSystem.persistence.StudentZenClassEntity;
 import com.example.attendanceSystem.persistence.StudentZenClassRepository;
 import com.example.attendanceSystem.service.StudentZenClassService;

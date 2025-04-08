@@ -24,8 +24,9 @@ public class ClassAttendanceController {
 
     @PostMapping("/create")
     public ResponseEntity<ClassAttendanceEntity> Create(@RequestBody ClassAttendanceEntity classAttendanceEntity) {
-        ClassAttendanceEntity classAttendance = classAttendanceRepository.save(classAttendanceEntity);
-        return ResponseEntity.ok(classAttendance);
+        ClassAttendanceEntity classAttendance = classAttendanceService.save(classAttendanceEntity);
+        if(classAttendance != null) return ResponseEntity.ok(classAttendance);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/query")
