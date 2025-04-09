@@ -18,7 +18,7 @@ public class ClassAttendanceEntity {
     private Long classSessionId;
 
     @Column(name = "status")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private AttendanceStatusEnum status;
 
     @Column(name = "note")

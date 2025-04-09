@@ -17,9 +17,6 @@ import java.util.List;
 public class ClassAttendanceController {
 
     @Autowired
-    private ClassAttendanceRepository classAttendanceRepository;
-
-    @Autowired
     private ClassAttendanceService classAttendanceService;
 
     @PostMapping("/create")
@@ -31,7 +28,7 @@ public class ClassAttendanceController {
 
     @PostMapping("/query")
     public ResponseEntity<List<ClassAttendanceEntity>> Query() {
-        List<ClassAttendanceEntity> classAttendanceList = classAttendanceRepository.findAll();
+        List<ClassAttendanceEntity> classAttendanceList = classAttendanceService.findAll();
         return ResponseEntity.ok(classAttendanceList);
     }
 
@@ -43,8 +40,8 @@ public class ClassAttendanceController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> Delete(@RequestBody ClassAttendanceEntity classAttendanceEntity) {
-        if(classAttendanceService.delete(classAttendanceEntity)) return ResponseEntity.ok().build();
+    public ResponseEntity<?> Delete(@RequestBody long classAttendanceId) {
+        if(classAttendanceService.delete(classAttendanceId)) return ResponseEntity.ok().build();
         return ResponseEntity.badRequest().build();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.attendanceSystem.persistence;
 
+import com.example.attendanceSystem.enums.StatusEnum;
 import com.example.attendanceSystem.enums.UserRoleEnum;
 
 import javax.persistence.*;
@@ -24,8 +25,12 @@ public class UserEntity {
     private String password;
 
     @Column(name = "role")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private StatusEnum status;
 
     public Long getId() {
         return id;

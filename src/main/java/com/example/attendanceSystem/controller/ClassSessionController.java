@@ -24,13 +24,13 @@ public class ClassSessionController {
 
     @PostMapping("/create")
     public ResponseEntity<ClassSessionEntity> Create(@RequestBody ClassSessionEntity classSessionEntity) {
-        ClassSessionEntity classSession = classSessionRepository.save(classSessionEntity);
+        ClassSessionEntity classSession = classSessionService.save(classSessionEntity);
         return ResponseEntity.ok(classSession);
     }
 
     @PostMapping("/query")
     public ResponseEntity<List<ClassSessionEntity>> Query() {
-        List<ClassSessionEntity> classSessionList = classSessionRepository.findAll();
+        List<ClassSessionEntity> classSessionList = classSessionService.findAll();
         return ResponseEntity.ok(classSessionList);
     }
 
@@ -42,8 +42,8 @@ public class ClassSessionController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> Delete(@RequestBody ClassSessionEntity classSessionEntity) {
-        if(classSessionService.delete(classSessionEntity)) return ResponseEntity.ok().build();
+    public ResponseEntity<?> Delete(@RequestBody long classSessionId) {
+        if(classSessionService.delete(classSessionId)) return ResponseEntity.ok().build();
         return ResponseEntity.badRequest().build();
     }
 }

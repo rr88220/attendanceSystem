@@ -1,14 +1,14 @@
 package com.example.attendanceSystem.enums;
 
-public enum UserRoleEnum {
+public enum TimeEnum {
 
-    ADMIN("管理員"),
+    DAY("日間"),
 
-    MEMBER("使用者");
+    NIGHT("夜間");
 
     private String chName;
 
-    private UserRoleEnum(String chName) {
+    private TimeEnum(String chName) {
         this.chName =  chName;
     }
 

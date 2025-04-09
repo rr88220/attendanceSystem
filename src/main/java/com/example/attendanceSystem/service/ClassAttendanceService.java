@@ -1,12 +1,13 @@
 package com.example.attendanceSystem.service;
 
-import com.example.attendanceSystem.enums.AttendanceStatusEnum;
 import com.example.attendanceSystem.persistence.ClassAttendanceEntity;
 import com.example.attendanceSystem.persistence.ClassAttendanceRepository;
 import com.example.attendanceSystem.persistence.ClassSessionRepository;
 import com.example.attendanceSystem.persistence.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ClassAttendanceService {
@@ -27,6 +28,10 @@ public class ClassAttendanceService {
         return null;
     }
 
+    public List<ClassAttendanceEntity> findAll() {
+        return classAttendanceRepository.findAll();
+    }
+
     public ClassAttendanceEntity update(ClassAttendanceEntity classAttendanceEntity) {
         if(classAttendanceRepository.existsById(classAttendanceEntity.getId())) {
             return classAttendanceRepository.save(classAttendanceEntity);
@@ -34,24 +39,20 @@ public class ClassAttendanceService {
         return null;
     }
 
-    public boolean delete(ClassAttendanceEntity classAttendanceEntity) {
-        if(classAttendanceRepository.existsById(classAttendanceEntity.getId())) {
-            classAttendanceRepository.deleteById(classAttendanceEntity.getId());
+    public boolean delete(long classAttendanceId) {
+        if(classAttendanceRepository.existsById(classAttendanceId)) {
+            classAttendanceRepository.deleteById(classAttendanceId);
             return true;
         }
         return false;
     }
 
     private boolean checkEntity(ClassAttendanceEntity classAttendanceEntity) {
-        boolean check = true;
         if (classAttendanceEntity.getClassSessionId() == null ||
                 !classSessionRepository.existsById(classAttendanceEntity.getClassSessionId())) {
-            check = false;
+            return false;
         }
-        if (classAttendanceEntity.getStudentId() == null ||
-                !studentRepository.existsById(classAttendanceEntity.getStudentId())) {
-            check = false;
-        }
-        return check;
+        return classAttendanceEntity.getStudentId() != null &&
+                studentRepository.existsById(classAttendanceEntity.getStudentId());
     }
 }

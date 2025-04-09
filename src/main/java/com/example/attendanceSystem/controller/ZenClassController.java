@@ -17,20 +17,18 @@ import java.util.List;
 public class ZenClassController {
 
     @Autowired
-    private ZenClassRepository zenClassRepository;
-
-    @Autowired
     private ZenClassService zenClassService;
 
     @PostMapping("/create")
     public ResponseEntity<ZenClassEntity> Create(@RequestBody ZenClassEntity zenClassEntity) {
-        ZenClassEntity zenClass = zenClassRepository.save(zenClassEntity);
-        return ResponseEntity.ok(zenClass);
+        ZenClassEntity zenClass = zenClassService.save(zenClassEntity);
+        if (zenClass != null) return ResponseEntity.ok(zenClass);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/query")
     public ResponseEntity<List<ZenClassEntity>> Query() {
-        List<ZenClassEntity> zenClassList = zenClassRepository.findAll();
+        List<ZenClassEntity> zenClassList = zenClassService.findAll();
         return ResponseEntity.ok(zenClassList);
     }
 
@@ -42,8 +40,8 @@ public class ZenClassController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> Delete(@RequestBody ZenClassEntity zenClassEntity) {
-        if(zenClassService.delete(zenClassEntity)) return ResponseEntity.ok().build();
+    public ResponseEntity<?> Delete(@RequestBody long zenClassId) {
+        if(zenClassService.delete(zenClassId)) return ResponseEntity.ok().build();
         return ResponseEntity.badRequest().build();
     }
 }

@@ -18,7 +18,7 @@ public class StudentZenClassEntity {
     private Long zenClassId;
 
     @Column(name = "role")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ClassRoleEnum role;
 
     public Long getId() {

@@ -17,20 +17,18 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    private StudentRepository studentRepository;
-
-    @Autowired
     private StudentService studentService;
 
     @PostMapping("/create")
     public ResponseEntity<StudentEntity> Create(@RequestBody StudentEntity studentEntity) {
-        StudentEntity student = studentRepository.save(studentEntity);
-        return ResponseEntity.ok(student);
+        StudentEntity student = studentService.save(studentEntity);
+        if (student != null) return ResponseEntity.ok(student);
+        return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/query")
     public ResponseEntity<List<StudentEntity>> Query() {
-        List<StudentEntity> studentList = studentRepository.findAll();
+        List<StudentEntity> studentList = studentService.findAll();
         return ResponseEntity.ok(studentList);
     }
 
@@ -42,8 +40,8 @@ public class StudentController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> Delete(@RequestBody StudentEntity studentEntity) {
-        if(studentService.delete(studentEntity)) return ResponseEntity.ok().build();
+    public ResponseEntity<?> Delete(@RequestBody long studentId) {
+        if(studentService.delete(studentId)) return ResponseEntity.ok().build();
         return ResponseEntity.badRequest().build();
     }
 }

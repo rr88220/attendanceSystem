@@ -1,6 +1,8 @@
 package com.example.attendanceSystem.persistence;
 
 import com.example.attendanceSystem.enums.ClassLevelEnum;
+import com.example.attendanceSystem.enums.TimeEnum;
+import com.example.attendanceSystem.enums.WeekEnum;
 
 import javax.persistence.*;
 
@@ -15,8 +17,16 @@ public class ZenClassEntity {
     private String period;
 
     @Column(name = "level")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ClassLevelEnum level;
+
+    @Column(name = "week")
+    @Enumerated(EnumType.STRING)
+    private WeekEnum week;
+
+    @Column(name = "time")
+    @Enumerated(EnumType.STRING)
+    private TimeEnum time;
 
     public Long getId() {
         return id;
@@ -40,5 +50,21 @@ public class ZenClassEntity {
 
     public void setLevel(ClassLevelEnum level) {
         this.level = level;
+    }
+
+    public WeekEnum getWeek() {
+        return week;
+    }
+
+    public void setWeek(WeekEnum week) {
+        this.week = week;
+    }
+
+    public TimeEnum getTime() {
+        return time;
+    }
+
+    public void setTime(TimeEnum time) {
+        this.time = time;
     }
 }

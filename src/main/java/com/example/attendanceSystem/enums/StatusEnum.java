@@ -1,14 +1,14 @@
 package com.example.attendanceSystem.enums;
 
-public enum UserRoleEnum {
+public enum StatusEnum {
 
-    ADMIN("管理員"),
+    ENABLE("啟用"),
 
-    MEMBER("使用者");
+    CLOSE("停用");
 
     private String chName;
 
-    private UserRoleEnum(String chName) {
+    private StatusEnum(String chName) {
         this.chName =  chName;
     }
 
